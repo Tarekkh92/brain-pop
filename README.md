@@ -1,5 +1,4 @@
-SchoolApp Rest Api Endpoints
-
+How to swim
 
 Create Teacher:
 Method: POST
