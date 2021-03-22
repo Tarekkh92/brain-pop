@@ -1,62 +1,150 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+SchoolApp Rest Api Endpoints
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+Create Teacher:
+Method: POST
+URL: https://brainpoptk.herokuapp.com/public/api/create-teacher
+Body: form-data
+Keys: fullname, email, username, password
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Create Student:
+Method: POST
+URL: https://brainpoptk.herokuapp.com/public/api/create-student
+Body: form-data
+Keys: fullname, username, password, grade
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Get All Students:
+Method: GET
+URL: https://brainpoptk.herokuapp.com/public/api/students/all
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Get All Teachers:
+Method: GET
+URL: https://brainpoptk.herokuapp.com/public/api/teachers/all
 
-## Learning Laravel
+Student Login:
+Method: POST
+URL: https://brainpoptk.herokuapp.com/public/api/student/login
+Body: form-data
+Keys: email, password
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+After login as a student, you get a token in returned json data.
+You need to use this token to make teacher related requests. When making student related requests, you need to set these 3 headers to make any request.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Update student profile:
+Method: POST
+URL: https://brainpoptk.herokuapp.com/public/api/student/update
+Headers: 
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+Body: x-www-form-urlencoded
+Keys: fullname, username, grade
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+Teacher Login:
+Method: POST
+URL: https://brainpoptk.herokuapp.com/public/api/teacher/login
+Body: form-data
+Keys: email, password
 
-## Contributing
+After login as a teacher, you get a token in returned json data.
+You need to use this token to make teacher related requests. When making teacher related requests, you need to set these  3 headers to make any request.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+Add Period:
+Method: POST
+URL: https://brainpoptk.herokuapp.com/public/api/teacher/period/add
+Headers: 
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+Body: x-www-form-urlencoded
+Keys: name
 
-## Code of Conduct
+Update Period:
+Method: POST
+URL: https://brainpoptk.herokuapp.com/public/api/teacher/period/update
+Headers: 
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+Body: x-www-form-urlencoded
+Keys: period_id, name
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Get all Periods:
+Method: GET
+URL: https://brainpoptk.herokuapp.com/public/api/teacher/periods
+Headers: 
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
 
-## Security Vulnerabilities
+Add student to Period:
+Method: POST
+URL: https://brainpoptk.herokuapp.com/public/api/teacher/period/add/student
+Headers: 
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+Body: x-www-form-urlencoded
+Keys: period_id, student_id
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+Remove student from Period:
+Method: POST
+URL: https://brainpoptk.herokuapp.com/public/api/teacher/period/remove/student
+Headers: 
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+Body: x-www-form-urlencoded
+Keys: period_id, student_id
+
+
+Get all Students related to teachers via period:
+Method: GET
+URL: https://brainpoptk.herokuapp.com/public/api/teacher/students
+Headers: 
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+
+
+
+Get Students in a Period
+Method: GET
+URL: https://brainpoptk.herokuapp.com/public/api/teacher/period/{period_id}/students
+Replace {period_id} with the actual period id.
+Headers: 
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+
+
+
+
+
+
+
+Update teacher profile:
+Method: POST
+URL: https://brainpoptk.herokuapp.com/public/api/teacher/update
+Headers: 
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+Body: x-www-form-urlencoded
+Keys: fullname, username, email
+
+
